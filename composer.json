@@ -1,0 +1,39 @@
+{
+  "name": "easyexpress/express",
+  "description": "快递SDK",
+  "keywords": [
+
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "renshuai",
+      "email": "renshuaia@gmail.com"
+    }
+  ],
+  "require": {
+    "php":">=7.0.0",
+    "monolog/monolog": "^1.23",
+    "guzzlehttp/guzzle": "^6.3",
+    "pimple/pimple": "^3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "EasyExpress\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "EasyExpress\\Tests\\": "tests/"
+    }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}
