@@ -46,6 +46,11 @@ class AccessToken
         return $this->http ?: $this->http = new Http();
     }
 
+    public function setHttp($http)
+    {
+        $this->http = $http;
+    }
+
     public function getCacheKey()
     {
         if (is_null($this->cacheKey)) {
@@ -58,6 +63,13 @@ class AccessToken
     public function getCache()
     {
         return $this->cache ?: $this->cache = new FilesystemCache(sys_get_temp_dir());
+    }
+
+    public function setCache(Cache $cache)
+    {
+        $this->cache = $cache;
+
+        return $this;
     }
 
     public function getToken($forceRefresh = false)
@@ -81,7 +93,7 @@ class AccessToken
     {
         $params = [
             "head" => [
-                "transMessageId" => date('Ymd', time()) . mt_rand(1000000000, 9999999999), //todo 这里不行，随机数也会重复
+                "transMessageId" => date('Ymd', time()) . mt_rand(1000000000, 9999999999),
                 "transType" => 301
             ],
             "body" => null

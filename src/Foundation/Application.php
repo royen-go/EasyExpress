@@ -57,6 +57,9 @@ class Application extends Container
         return $this->offsetGet($id);
     }
 
+    /**
+     *
+     */
     private function registerProviders()
     {
         foreach ($this->providers as $provider) {
