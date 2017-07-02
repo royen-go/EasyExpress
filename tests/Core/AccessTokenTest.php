@@ -12,7 +12,7 @@ class AccessTokenTest extends TestCase
 {
 
     /**
-     * 
+     *
      */
     public function testGetToken()
     {
