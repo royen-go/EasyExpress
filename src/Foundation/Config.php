@@ -3,7 +3,9 @@
 namespace EasyExpress\Foundation;
 
 
-class Config extends Collec
+use EasyExpress\Support\Collection;
+
+class Config extends Collection
 {
 
 }

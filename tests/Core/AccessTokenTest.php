@@ -22,6 +22,7 @@ class AccessTokenTest extends TestCase
                 return $token;
             });
         });
+
         $http = \Mockery::mock(Http::class.'[json]', function ($mock) {
             $mock->shouldReceive('json')->andReturn(json_encode([
                 'body' => [
@@ -30,7 +31,7 @@ class AccessTokenTest extends TestCase
             ]));
         });
 
-        $accessToken = new AccessToken();
+        $accessToken = new AccessToken('appIID', 'appKey');
 
         $accessToken->setCache($cache);
         $accessToken->setHttp($http);

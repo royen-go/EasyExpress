@@ -10,8 +10,8 @@ class AccessToken
 {
     const API_TOKEN_GET = 'https://open-sbox.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
 
-    private $appId = '00029291';
-    private $appKey = '345ABEF53B6F4A75463A3D625F9763BB';
+    private $appId;
+    private $appKey;
 
 
     /**
@@ -28,12 +28,13 @@ class AccessToken
 
     protected $cacheKey;
 
-    protected $prefix = 'easyexpress.shunfeng.access_token.';
+    protected $prefix = 'easyexpress.access_token.';
 
 
-    public function __construct()
+    public function __construct($appID, $appKey)
     {
-
+        $this->appId = $appID;
+        $this->appKey = $appKey;
     }
 
     /**
