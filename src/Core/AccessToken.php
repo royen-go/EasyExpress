@@ -38,6 +38,22 @@ class AccessToken
     }
 
     /**
+     * @return mixed
+     */
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAppKey()
+    {
+        return $this->appKey;
+    }
+
+    /**
      * Return the http instance.
      *
      * @return \EasyExpress\Core\Http

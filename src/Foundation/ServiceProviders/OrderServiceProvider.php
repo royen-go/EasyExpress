@@ -10,8 +10,8 @@ class OrderServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $pimple)
     {
-        $pimple['order'] = function () {
-            return new Order();
+        $pimple['order'] = function ($pimple) {
+            return new Order($pimple['access_token']);
         };
     }
 }
