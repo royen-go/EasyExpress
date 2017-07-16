@@ -3,6 +3,7 @@
 namespace EasyExpress\Core;
 
 
+use EasyExpress\Core\Exceptions\HttpException;
 use EasyExpress\Support\Collection;
 use EasyExpress\Support\Log;
 use GuzzleHttp\Middleware;
@@ -18,7 +19,7 @@ abstract class AbstractAPI
     /**
      * @var AccessToken
      */
-    private $accessToken;
+    protected $accessToken;
 
     /**
      * @var Http
@@ -87,7 +88,7 @@ abstract class AbstractAPI
                 $path .= 'access_token/' . $token . '/sf_appid/' . $this->accessToken->getAppId() .  '/sf_appkey/' . $this->accessToken->getAppKey();
                 $uri = $uri->withPath($path);
                 $request = $request->withUri($uri);
-echo $uri; exit;
+
                 Log::debug("attache access token : {$uri}");
                 Log::debug("attache path : {$path}");
                 return $handler($request, $options);
@@ -152,7 +153,25 @@ echo $uri; exit;
 
         $contents = $http->parseJSON(call_user_func_array([$http, $method], $args));
 
+        $this->checkAndThrow($contents);
+
         return new Collection($contents);
+    }
+
+    /**
+     * @param array $contents
+     * @throws HttpException
+     *
+     */
+    protected function checkAndThrow(array $contents)
+    {
+        if (isset($contents['head']) && isset($contents['head']['code']) && 'EX_CODE_OPENAPI_0200' !== $contents['head']['code']) {
+
+            if (empty($contents['head']['message'])) {
+                $contents['head'] = 'Unknown';
+            }
+            throw new HttpException($contents['head']['message'], $contents['head']['code']);
+        }
     }
 
 }

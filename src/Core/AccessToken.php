@@ -12,6 +12,7 @@ class AccessToken
 
     private $appId;
     private $appKey;
+    private $custId;
 
 
     /**
@@ -31,10 +32,17 @@ class AccessToken
     protected $prefix = 'easyexpress.access_token.';
 
 
-    public function __construct($appID, $appKey)
+    /**
+     * AccessToken constructor.
+     * @param $appID
+     * @param $appKey
+     * @param $custId
+     */
+    public function __construct($appID, $appKey, $custId)
     {
         $this->appId = $appID;
         $this->appKey = $appKey;
+        $this->custId = $custId;
     }
 
     /**
@@ -51,6 +59,11 @@ class AccessToken
     public function getAppKey()
     {
         return $this->appKey;
+    }
+
+    public function getCustId()
+    {
+        return $this->custId;
     }
 
     /**

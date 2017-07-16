@@ -83,7 +83,8 @@ class Application extends Container
         $this['access_token'] = function () {
             return new AccessToken(
                 $this['config']['appID'],
-                $this['config']['appKey']
+                $this['config']['appKey'],
+                $this['config']['custID']
             );
         };
 
