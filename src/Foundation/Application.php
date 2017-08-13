@@ -75,6 +75,7 @@ class Application extends Container
 
         Log::setLogger($logger);
     }
+
     /**
      *
      */
