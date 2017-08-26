@@ -3,7 +3,6 @@
 namespace EasyExpress\Order;
 
 use EasyExpress\Core\AbstractAPI;
-use EasyExpress\Core\AccessToken;
 use InvalidArgumentException;
 
 /**
@@ -13,20 +12,26 @@ use InvalidArgumentException;
  */
 class Order extends AbstractAPI
 {
+
+    /**
+     * 快速下单类型
+     */
+    const CREATE_ORDER_TYPE = 200;
+
     /**
      *
      */
     const CREATE_ORDER_URL = "https://open-sbox.sf-express.com/rest/v1.0/order/";
 
     /**
-     * @var
+     * 类型
      */
-    private $custID;
+    const QUERY_ORDER_TYPE = 203;
 
     /**
-     * @var array
+     *
      */
-    public $dataHead = [];
+    const QUERY_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/query/';
 
     /**
      * @var array
@@ -82,41 +87,50 @@ class Order extends AbstractAPI
     protected $required = ['cargoInfo', 'consigneeInfo', 'expressType', 'isDoCall', 'isGenBillNo', 'orderId', 'payMethod'];
 
     /**
-     * Order constructor.
-     * @param AccessToken $accessToken
-     */
-    public function __construct(AccessToken $accessToken)
-    {
-        parent::__construct($accessToken);
-
-        $this->custID = $accessToken->getCustId();
-
-        $this->dataHead = [
-            "transMessageId" => date('YmdHis', time()).mt_rand(1000, 9999),
-            "transType" => 200
-        ];
-
-        $addedServices = [];
-        $this->data['addedServices'] = $addedServices;
-
-        $this->data['sendStartTime'] = date('Y-m-d H:i:s');
-
-        $this->data['custId'] = $this->custID;
-    }
-
-
-    /**
      * @param array $data
      * @return \EasyExpress\Support\Collection
      *
      */
     public function create(array $data = [])
     {
+        $addedServices = [];
+        $this->data['addedServices'] = $addedServices;
+
+        $this->data['sendStartTime'] = date('Y-m-d H:i:s');
+
+        $this->data['custId'] = $this->accessToken->getCustId();
+
+        $dataHead = [
+            "transMessageId" => $this->getTransMessageId(),
+            "transType" => self::CREATE_ORDER_TYPE
+        ];
+
         $data = array(
-            "head" => $this->dataHead,
+            "head" => $dataHead,
             "body" => $this->validParams($data)
         );
         $body = $this->parseJSON('json', [self::CREATE_ORDER_URL, $data]);
+        return $body;
+    }
+
+    /**
+     * @param $orderID
+     * @return \EasyExpress\Support\Collection
+     * 
+     */
+    public function query($orderID)
+    {
+        $dataHead = [
+            "transMessageId" => $this->getTransMessageId(),
+            "transType" => self::QUERY_ORDER_TYPE
+        ];
+
+        $data = array(
+            "head" => $dataHead,
+            "body" => ['orderId' => $orderID]
+        );
+
+        $body = $this->parseJSON('json', [self::QUERY_ORDER_URL, $data]);
         return $body;
     }
 
@@ -134,8 +148,6 @@ class Order extends AbstractAPI
             }
             $params[$key] = empty($value) ? $this->data[$key] : $value;
         }
-
-
 
         return $params;
     }

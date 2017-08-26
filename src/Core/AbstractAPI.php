@@ -12,14 +12,20 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractAPI
 {
+    /**
+     * @var
+     */
     private $appId;
 
+    /**
+     * @var
+     */
     private $appKey;
 
     /**
      * @var AccessToken
      */
-    protected $accessToken;
+    public $accessToken;
 
     /**
      * @var Http
@@ -172,6 +178,15 @@ abstract class AbstractAPI
             }
             throw new HttpException($contents['head']['message'], $contents['head']['code']);
         }
+    }
+
+    /**
+     * @return string
+     * @author renshuai
+     */
+    protected function getTransMessageId()
+    {
+        return date('YmdHis', time()).mt_rand(1000, 9999);
     }
 
 }
