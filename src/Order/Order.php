@@ -34,6 +34,16 @@ class Order extends AbstractAPI
     const QUERY_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/query/';
 
     /**
+     * 类型
+     */
+    const FILTER_ORDER_TYPE = 204;
+
+    /**
+     *
+     */
+    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/filter/';
+
+    /**
      * @var array
      */
     public $data = [
@@ -134,6 +144,38 @@ class Order extends AbstractAPI
         return $body;
     }
 
+    public function filter()
+    {
+        $dataHead = [
+            "transMessageId" => $this->getTransMessageId(),
+            "transType" => self::FILTER_ORDER_TYPE
+        ];
+
+        $data = array(
+            "head" => $dataHead,
+            "body" => [
+                "filterType" => "1",
+                "deliverCustId" => "4342",
+
+                "deliverTel" => "0755-28680875",
+                "deliverCountry" => "中国",
+                "deliverProvince" =>  "广东省",
+                "deliverCity" => "深圳市",
+                "deliverCounty" => "福田区",
+                "deliverAddress" => "新洲十一街万基商务大厦",
+
+                "consigneeTel" => "13456787123",
+                "consigneeCountry" => "中国",
+                "consigneeProvince" =>  "广东省",
+                "consigneeCity" => "深圳市",
+                "consigneeCounty" => "福田区",
+                "consigneeAddress" => "新洲十一街万基商务大厦",
+            ]
+        );
+
+        $body = $this->parseJSON('json', [self::FILTER_ORDER_URL, $data]);
+        return $body;
+    }
     /**
      * @param array $data
      * @return array

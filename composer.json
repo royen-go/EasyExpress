@@ -1,8 +1,11 @@
 {
   "name": "easyexpress/shunfeng",
-  "description": "顺丰",
+  "description": "顺丰SDK",
   "keywords": [
-
+    "shunfeng SDK",
+    "shunfeng",
+    "顺丰",
+    "顺丰SDK"
   ],
   "license": "MIT",
   "authors": [
