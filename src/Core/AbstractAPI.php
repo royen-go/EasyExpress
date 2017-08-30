@@ -176,7 +176,7 @@ abstract class AbstractAPI
             if (empty($contents['head']['message'])) {
                 $contents['head'] = 'Unknown';
             }
-            throw new HttpException($contents['head']['message'], $contents['head']['code']);
+            throw new HttpException($contents['head']['message'], intval($contents['head']['code']));
         }
     }
 

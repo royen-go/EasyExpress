@@ -8,12 +8,14 @@ use Doctrine\Common\Cache\FilesystemCache;
 
 class AccessToken
 {
+    /**
+     *
+     */
     const API_TOKEN_GET = 'https://open-sbox.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
 
     private $appId;
     private $appKey;
     private $custId;
-
 
     /**
      * @var Http
@@ -30,7 +32,6 @@ class AccessToken
     protected $cacheKey;
 
     protected $prefix = 'easyexpress.access_token.';
-
 
     /**
      * AccessToken constructor.
@@ -61,6 +62,10 @@ class AccessToken
         return $this->appKey;
     }
 
+    /**
+     * @return mixed
+     * @author renshuai
+     */
     public function getCustId()
     {
         return $this->custId;
@@ -102,6 +107,11 @@ class AccessToken
         return $this;
     }
 
+    /**
+     * @param bool $forceRefresh
+     * @return false|string
+     * @author renshuai
+     */
     public function getToken($forceRefresh = false)
     {
         $cacheKey = $this->getCacheKey();
