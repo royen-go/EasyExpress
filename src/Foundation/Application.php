@@ -2,8 +2,10 @@
 namespace EasyExpress\Foundation;
 
 use EasyExpress\Core\AccessToken;
+use EasyExpress\Order\Filter;
 use EasyExpress\Order\Order;
 use EasyExpress\Router\Router;
+
 use EasyExpress\Support\Log;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\NullHandler;
@@ -18,6 +20,7 @@ use Pimple\Container;
  *
  * @property Order $order
  * @property Router $router
+ * @property Filter $filter
  *
  */
 class Application extends Container

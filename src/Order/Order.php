@@ -41,7 +41,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/filter/';
+    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/query/';
 
     /**
      * @var array
@@ -155,20 +155,20 @@ class Order extends AbstractAPI
             "head" => $dataHead,
             "body" => [
                 "filterType" => "1",
-                "deliverCustId" => "4342",
+//                "deliverCustId" => "4342",
 
-                "deliverTel" => "0755-28680875",
-                "deliverCountry" => "中国",
-                "deliverProvince" =>  "广东省",
-                "deliverCity" => "深圳市",
-                "deliverCounty" => "福田区",
-                "deliverAddress" => "新洲十一街万基商务大厦",
+//                "deliverTel" => "0755-28680875",
+//                "deliverCountry" => "中国",
+//                "deliverProvince" =>  "广东省",
+//                "deliverCity" => "深圳市",
+//                "deliverCounty" => "福田区",
+//                "deliverAddress" => "新洲十一街万基商务大厦",
 
                 "consigneeTel" => "13456787123",
                 "consigneeCountry" => "中国",
-                "consigneeProvince" =>  "广东省",
-                "consigneeCity" => "深圳市",
-                "consigneeCounty" => "福田区",
+                "consigneeProvince" =>  "西藏自治区",
+                "consigneeCity" => "拉萨市",
+                "consigneeCounty" => "墨竹工卡县",
                 "consigneeAddress" => "新洲十一街万基商务大厦",
             ]
         );
