@@ -7,6 +7,17 @@ use EasyExpress\Core\AbstractAPI;
 
 class Router extends AbstractAPI
 {
+
+    /**
+     * 2根据订单号查询
+     */
+    const TRACKING_TYPE_ORDER = 2;
+
+    /**
+     * 1根据运单号查询
+     */
+    const TRACKING_TYPE_WAYBILL = 1;
+
     /**
      * 
      */
@@ -29,26 +40,6 @@ class Router extends AbstractAPI
     const QUERY_INC_ROUTER_URL = "https://open-sbox.sf-express.com/rest/v1.0/route/inc/query/";
 
     /**
-     *
-     */
-    const WAYBILL_IMAGE_TYPE = 205;
-
-    /**
-     *
-     */
-    const WAYBILL_IMAGE_URL = "https://open-sbox.sf-express.com/rest/v1.0/waybill/image/";
-
-    /**
-     *
-     */
-    const PRODUCT_ADDITIONAL_QUERY_TYPE = 251;
-
-    /**
-     *
-     */
-    const PRODUCT_ADDITIONAL_QUERY_URL = "https://open-sbox.sf-express.com/rest/v1.0/product/additional/query/";
-
-    /**
      * @param $trackingNumber
      * @param $trackingType
      * @return \EasyExpress\Support\Collection
@@ -63,9 +54,9 @@ class Router extends AbstractAPI
         $data = array(
             "head" => $dataHead,
             "body" => [
-                "trackingType" => $trackingType, //2根据订单号查询；1根据运单号查询
+                "trackingType" => $trackingType,
                 "trackingNumber" => $trackingNumber,
-                "methodType" =>  "1"
+                "methodType" =>  "1" //标准查询【默认值】
             ]
         );
 
@@ -74,7 +65,11 @@ class Router extends AbstractAPI
         return $body;
     }
 
-    public function incQuery()
+    /**
+     * @param $orderId
+     * @return \EasyExpress\Support\Collection
+     */
+    public function incQuery($orderId)
     {
         $dataHead = [
             "transMessageId" => $this->getTransMessageId(),
@@ -84,7 +79,7 @@ class Router extends AbstractAPI
         $data = array(
             "head" => $dataHead,
             "body" => [
-                "orderId" => "JFKWEBELIEVE10005242131"
+                "orderId" => $orderId
             ]
         );
 
@@ -93,39 +88,5 @@ class Router extends AbstractAPI
         return $body;
     }
 
-    public function waybillDownload($orderId)
-    {
-        $dataHead = [
-            "transMessageId" => $this->getTransMessageId(),
-            "transType" => self::WAYBILL_IMAGE_TYPE
-        ];
 
-        $data = array(
-            "head" => $dataHead,
-            "body" => [
-                "orderId" => $orderId
-            ]
-        );
-
-        $body = $this->parseJSON('json', [self::WAYBILL_IMAGE_URL, $data]);
-
-        return $body;
-    }
-
-    public function queryProductAdditional()
-    {
-        $dataHead = [
-            "transMessageId" => $this->getTransMessageId(),
-            "transType" => self::PRODUCT_ADDITIONAL_QUERY_TYPE
-        ];
-
-        $data = array(
-            "head" => $dataHead,
-            "body" => new \stdClass()
-        );
-
-        $body = $this->parseJSON('json', [self::PRODUCT_ADDITIONAL_QUERY_URL, $data]);
-
-        return $body;
-    }
 }

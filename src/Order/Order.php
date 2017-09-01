@@ -34,14 +34,24 @@ class Order extends AbstractAPI
     const QUERY_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/query/';
 
     /**
-     * 类型
+     *
      */
-    const FILTER_ORDER_TYPE = 204;
+    const WAYBILL_IMAGE_TYPE = 205;
 
     /**
      *
      */
-    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/query/';
+    const WAYBILL_IMAGE_URL = "https://open-sbox.sf-express.com/rest/v1.0/waybill/image/";
+
+    /**
+     *
+     */
+    const PRODUCT_ADDITIONAL_QUERY_TYPE = 251;
+
+    /**
+     *
+     */
+    const PRODUCT_ADDITIONAL_QUERY_URL = "https://open-sbox.sf-express.com/rest/v1.0/product/additional/query/";
 
     /**
      * @var array
@@ -144,38 +154,49 @@ class Order extends AbstractAPI
         return $body;
     }
 
-    public function filter()
+    /**
+     * @param $orderId
+     * @return \EasyExpress\Support\Collection
+     *
+     */
+    public function waybillDownload($orderId)
     {
         $dataHead = [
             "transMessageId" => $this->getTransMessageId(),
-            "transType" => self::FILTER_ORDER_TYPE
+            "transType" => self::WAYBILL_IMAGE_TYPE
         ];
 
         $data = array(
             "head" => $dataHead,
             "body" => [
-                "filterType" => "1",
-//                "deliverCustId" => "4342",
-
-//                "deliverTel" => "0755-28680875",
-//                "deliverCountry" => "中国",
-//                "deliverProvince" =>  "广东省",
-//                "deliverCity" => "深圳市",
-//                "deliverCounty" => "福田区",
-//                "deliverAddress" => "新洲十一街万基商务大厦",
-
-                "consigneeTel" => "13456787123",
-                "consigneeCountry" => "中国",
-                "consigneeProvince" =>  "西藏自治区",
-                "consigneeCity" => "拉萨市",
-                "consigneeCounty" => "墨竹工卡县",
-                "consigneeAddress" => "新洲十一街万基商务大厦",
+                "orderId" => $orderId
             ]
         );
 
-        $body = $this->parseJSON('json', [self::FILTER_ORDER_URL, $data]);
+        $body = $this->parseJSON('json', [self::WAYBILL_IMAGE_URL, $data]);
         return $body;
     }
+
+    /**
+     * @return \EasyExpress\Support\Collection
+     *
+     */
+    public function queryProductAdditional()
+    {
+        $dataHead = [
+            "transMessageId" => $this->getTransMessageId(),
+            "transType" => self::PRODUCT_ADDITIONAL_QUERY_TYPE
+        ];
+
+        $data = array(
+            "head" => $dataHead,
+            "body" => new \stdClass()
+        );
+
+        $body = $this->parseJSON('json', [self::PRODUCT_ADDITIONAL_QUERY_URL, $data]);
+        return $body;
+    }
+
     /**
      * @param array $data
      * @return array
