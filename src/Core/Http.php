@@ -2,6 +2,7 @@
 namespace EasyExpress\Core;
 
 use EasyExpress\Core\Exceptions\HttpException;
+use EasyExpress\Support\Log;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
@@ -211,18 +212,18 @@ class Http
 
         $options = array_merge(self::$defaults, $options);
 
-//        Log::debug('Client Request:', compact('url', 'method', 'options'));
+        Log::debug('Client Request:', compact('url', 'method', 'options'));
 
         $options['handler'] = $this->getHandler();
 
         $response = $this->getClient()->request($method, $url, $options);
 
-//        Log::debug('API response:', [
-//            'Status' => $response->getStatusCode(),
-//            'Reason' => $response->getReasonPhrase(),
-//            'Headers' => $response->getHeaders(),
-//            'Body' => strval($response->getBody()),
-//        ]);
+        Log::debug('API response:', [
+            'Status' => $response->getStatusCode(),
+            'Reason' => $response->getReasonPhrase(),
+            'Headers' => $response->getHeaders(),
+            'Body' => strval($response->getBody()),
+        ]);
 
         return $response;
     }
@@ -246,7 +247,7 @@ class Http
 
         $contents = json_decode($body, true);
 
-//        Log::debug('API response decoded:', compact('contents'));
+        Log::debug('API response decoded:', compact('contents'));
 
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new HttpException('Failed to parse JSON: '.json_last_error_msg());

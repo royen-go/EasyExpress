@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyWeChat\Support;
 
 use finfo;

@@ -1,25 +1,43 @@
 SDK for ShunFeng
 
-模仿「overtrue/wechat」做的顺丰的SDK
-
 ## Requirement
 
 1. PHP >= 5.5.9
-2. **[composer](https://getcomposer.org/)**
+2. PHP cURL 扩展
+3. PHP OpenSSL 扩展
 
 > SDK 对所使用的框架并无特别要求
 
 ## Installation
 
 ```shell
+composer require easyexpress/shunfeng
 
 ```
 
 ## Usage
 
-基本使用（以服务端为例）:
+基本使用:
 
 ```php
+
+$config = [
+    'debug' => true,
+    'appID' => '000***11',
+    'appKey' => 'AC9DA1B7452***775118CA8DB1237431',
+    'custID' => '7550***174',
+    'log' => [
+        'level' => 'debug',
+        'file' => '/tmp/express.log'
+    ]
+
+];
+
+$app = new \EasyExpress\Foundation\Application($config);
+
+$order = $app->order;
+
+$order->queryProductAdditional();
 
 ```
 
@@ -27,11 +45,7 @@ SDK for ShunFeng
 ## Documentation
 
 > 强烈建议看懂顺丰文档后再来使用本 SDK。
-
-## Integration
-
-
-## Contribution
+> https://open.sf-express.com/doc/sf_openapi_document_V1.pdf
 
 
 ## License

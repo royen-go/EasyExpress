@@ -40,7 +40,7 @@ class Filter extends AbstractAPI
         "deliverCity" => "",
         "deliverCounty" => "",
         "deliverAddress" => "",
-        "deliverCustId" => "4342",
+        "deliverCustId" => "",
 
         "consigneeTel" => "",
         "consigneeCountry" => "",

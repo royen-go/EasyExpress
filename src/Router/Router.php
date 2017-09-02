@@ -19,18 +19,18 @@ class Router extends AbstractAPI
     const TRACKING_TYPE_WAYBILL = 1;
 
     /**
-     * 
+     * 路由查询
      */
     const QUERY_ROUTER_TYPE = 501;
 
     /**
-     *
+     * 路由查询
      */
     const QUERY_ROUTER_URL = "https://open-prod.sf-express.com/rest/v1.0/route/query/";
 
 
     /**
-     *
+     * 路由增量查询
      */
     const QUERY_INC_ROUTER_TYPE = 504;
 

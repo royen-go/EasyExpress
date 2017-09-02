@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyExpress\Foundation\ServiceProviders;
 
 use EasyExpress\Router\Router;

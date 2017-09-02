@@ -55,30 +55,6 @@ class Application extends Container
 
     }
 
-    private function initializeLogger()
-    {
-        if (Log::hasLogger()) {
-            return;
-        }
-
-        $logger = new Logger('express');
-
-        if (!$this['config']['debug'] || defined('PHPUNIT_RUNNING')) {
-            $logger->pushHandler(new NullHandler());
-        } elseif ($this['config']['log.handler'] instanceof HandlerInterface) {
-            $logger->pushHandler($this['config']['log.handler']);
-        } elseif ($logFile = $this['config']['log.file']) {
-            $logger->pushHandler(new StreamHandler(
-                    $logFile,
-                    $this['config']->get('log.level', Logger::WARNING),
-                    true,
-                    $this['config']->get('log.permission', null))
-            );
-        }
-
-        Log::setLogger($logger);
-    }
-
     /**
      *
      */
@@ -119,6 +95,31 @@ class Application extends Container
         }
     }
 
+    /**
+     *
+     */
+    private function initializeLogger()
+    {
+        if (Log::hasLogger()) {
+            return;
+        }
 
+        $logger = new Logger('express');
+
+        if (!$this['config']['debug'] || defined('PHPUNIT_RUNNING')) {
+            $logger->pushHandler(new NullHandler());
+        } elseif ($this['config']['log.handler'] instanceof HandlerInterface) {
+            $logger->pushHandler($this['config']['log.handler']);
+        } elseif ($logFile = $this['config']['log.file']) {
+            $logger->pushHandler(new StreamHandler(
+                    $logFile,
+                    $this['config']->get('log.level', Logger::WARNING),
+                    true,
+                    $this['config']->get('log.permission', null))
+            );
+        }
+
+        Log::setLogger($logger);
+    }
 
 }

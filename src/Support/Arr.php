@@ -1,6 +1,4 @@
 <?php
-
-
 namespace EasyExpress\Support;
 
 use Closure;

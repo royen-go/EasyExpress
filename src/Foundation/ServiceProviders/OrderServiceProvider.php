@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyExpress\Foundation\ServiceProviders;
 
 use EasyExpress\Order\Filter;
@@ -11,7 +10,6 @@ class OrderServiceProvider implements ServiceProviderInterface
 {
     /**
      * @param Container $pimple
-     *
      */
     public function register(Container $pimple)
     {

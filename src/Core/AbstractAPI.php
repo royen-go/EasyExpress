@@ -32,6 +32,9 @@ abstract class AbstractAPI
      */
     protected $http;
 
+    /**
+     * @var array
+     */
     protected $middlewares = [];
 
     /**
@@ -52,6 +55,10 @@ abstract class AbstractAPI
         $this->accessToken = $accessToken;
     }
 
+    /**
+     * @return Http
+     *
+     */
     public function getHttp()
     {
         if (is_null($this->http)) {
@@ -182,11 +189,10 @@ abstract class AbstractAPI
 
     /**
      * @return string
-     * @author renshuai
      */
     protected function getTransMessageId()
     {
-        return date('YmdHis', time()).mt_rand(1000, 9999);
+        return date('YmdHis') . mt_rand(1000, 9999);
     }
 
 }

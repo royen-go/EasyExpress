@@ -1,7 +1,5 @@
 <?php
-
 namespace EasyExpress\Tests\Core;
-
 
 use Doctrine\Common\Cache\Cache;
 use EasyExpress\Core\AccessToken;
@@ -31,7 +29,7 @@ class AccessTokenTest extends TestCase
             ]));
         });
 
-        $accessToken = new AccessToken('appIID', 'appKey');
+        $accessToken = new AccessToken('appIID', 'appKey', 'custId');
 
         $accessToken->setCache($cache);
         $accessToken->setHttp($http);

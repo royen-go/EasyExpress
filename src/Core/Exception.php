@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 namespace EasyExpress\Core;
 
 use Exception as BaseException;

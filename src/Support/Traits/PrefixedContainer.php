@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyExpress\Support\Traits;
 
 use EasyExpress\Support\Str;

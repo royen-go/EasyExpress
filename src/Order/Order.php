@@ -14,7 +14,7 @@ class Order extends AbstractAPI
 {
 
     /**
-     * 快速下单类型
+     * 快速下单
      */
     const CREATE_ORDER_TYPE = 200;
 
@@ -24,7 +24,7 @@ class Order extends AbstractAPI
     const CREATE_ORDER_URL = "https://open-prod.sf-express.com/rest/v1.0/order/";
 
     /**
-     * 类型
+     * 订单查询
      */
     const QUERY_ORDER_TYPE = 203;
 

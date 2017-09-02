@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyExpress\Core;
 
 
@@ -9,9 +8,14 @@ use Doctrine\Common\Cache\FilesystemCache;
 class AccessToken
 {
     /**
+     * 类型
+     */
+    const API_TOKEN_TYPE = 301;
+
+    /**
      *
      */
-    const API_TOKEN_GET = 'https://open-sbox.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
+    const API_TOKEN_GET = 'https://open-prod.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
 
     private $appId;
     private $appKey;
@@ -31,13 +35,13 @@ class AccessToken
 
     protected $cacheKey;
 
-    protected $prefix = 'easyexpress.access_token.';
+    protected $prefix = 'express.access_token.';
 
     /**
      * AccessToken constructor.
-     * @param $appID
-     * @param $appKey
-     * @param $custId
+     * @param string $appID
+     * @param string $appKey
+     * @param string $custId
      */
     public function __construct($appID, $appKey, $custId)
     {
@@ -64,7 +68,6 @@ class AccessToken
 
     /**
      * @return mixed
-     * @author renshuai
      */
     public function getCustId()
     {
@@ -110,7 +113,6 @@ class AccessToken
     /**
      * @param bool $forceRefresh
      * @return false|string
-     * @author renshuai
      */
     public function getToken($forceRefresh = false)
     {
@@ -129,12 +131,15 @@ class AccessToken
         return $cached;
     }
 
+    /**
+     * @return mixed
+     */
     public function getTokenFromServer()
     {
         $params = [
             "head" => [
-                "transMessageId" => date('Ymd', time()) . mt_rand(1000000000, 9999999999),
-                "transType" => 301
+                "transMessageId" => date('YmdHis') . mt_rand(1000, 9999),
+                "transType" => self::API_TOKEN_TYPE
             ],
             "body" => null
         ];
@@ -144,6 +149,7 @@ class AccessToken
         $url = sprintf(self::API_TOKEN_GET, $this->appId, $this->appKey);
 
         $token = $http->parseJSON($http->json($url, $params));
+
 
         return $token;
     }
