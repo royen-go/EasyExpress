@@ -20,7 +20,7 @@ class Filter extends AbstractAPI
     /**
      *
      */
-    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/filter/';
+    const FILTER_ORDER_URL = 'https://open-prod.sf-express.com/rest/v1.0/filter/';
 
     /**
      * @var array

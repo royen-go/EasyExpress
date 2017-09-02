@@ -26,7 +26,7 @@ class Router extends AbstractAPI
     /**
      *
      */
-    const QUERY_ROUTER_URL = "https://open-sbox.sf-express.com/rest/v1.0/route/query/";
+    const QUERY_ROUTER_URL = "https://open-prod.sf-express.com/rest/v1.0/route/query/";
 
 
     /**
@@ -37,7 +37,7 @@ class Router extends AbstractAPI
     /**
      *
      */
-    const QUERY_INC_ROUTER_URL = "https://open-sbox.sf-express.com/rest/v1.0/route/inc/query/";
+    const QUERY_INC_ROUTER_URL = "https://open-prod.sf-express.com/rest/v1.0/route/inc/query/";
 
     /**
      * @param $trackingNumber
