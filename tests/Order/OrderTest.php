@@ -108,17 +108,6 @@ class OrderTest extends TestCase
 
     }
 
-    public function testFilter()
-    {
-        $order = $this->getOrder(true);
-
-        $result = $order->filter();
-
-        $this->assertEquals('EX_CODE_OPENAPI_0200', $result['head']['code']);
-        $this->assertEquals('4204', $result['head']['transType']);
-    }
-
-
     public function testMagicAccess()
     {
         $accessToken = \Mockery::mock('EasyExpress\Core\AccessToken');
