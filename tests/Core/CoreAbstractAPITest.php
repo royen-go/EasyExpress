@@ -38,7 +38,9 @@ class CoreAbstractAPITest extends TestCase
         $accessToken = \Mockery::mock(AccessToken::class);
         $api = new FooAPI($accessToken);
         $this->assertNull($api->getHttpInstance());
+
         $api->getHttp();
+
         $this->assertInstanceOf(Http::class, $api->getHttpInstance());
         $middlewares = $api->getHttp()->getMiddlewares();
         $this->assertCount(3, $middlewares);

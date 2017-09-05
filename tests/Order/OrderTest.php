@@ -5,9 +5,9 @@ namespace EasyExpress\Tests\Order;
 
 use EasyExpress\Core\AccessToken;
 use EasyExpress\Core\Exceptions\HttpException;
+use EasyExpress\Core\Exceptions\InvalidArgumentException;
 use EasyExpress\Order\Order;
 use EasyExpress\Tests\TestCase;
-use InvalidArgumentException;
 
 class OrderTest extends TestCase
 {
@@ -21,12 +21,11 @@ class OrderTest extends TestCase
     public function getOrder($mockHttp = false)
     {
         if ($mockHttp) {
-            $accessToken = new AccessToken('00033311', 'AC9DA1B7452BE5775118CA8DB1237431', '7550010174');
-//            $accessToken = \Mockery::mock('EasyExpress\Core\AccessToken');
-//            $accessToken->shouldReceive('getToken')->andReturn('foo');
-//            $accessToken->shouldReceive('getCustId')->andReturn('7550010174');
-//            $accessToken->shouldReceive('getAppId')->andReturn('00033311');
-//            $accessToken->shouldReceive('getAppKey')->andReturn('AC9DA1B7452BE5775118CA8DB1237431');
+            $accessToken = \Mockery::mock('EasyExpress\Core\AccessToken');
+            $accessToken->shouldReceive('getToken')->andReturn('foo');
+            $accessToken->shouldReceive('getCustId')->andReturn('7550010174');
+            $accessToken->shouldReceive('getAppId')->andReturn('00033311');
+            $accessToken->shouldReceive('getAppKey')->andReturn('AC9DA1B7452BE5775118CA8DB1237431');
 
             $order = new Order($accessToken);
             $http = \Mockery::mock('EasyExpress\Core\Http[json]');
@@ -56,56 +55,19 @@ class OrderTest extends TestCase
     {
         $order = $this->getOrder(true);
 
-        try{
+        try {
             $order->create();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf(InvalidArgumentException::class, $e);
         }
 
-        $data = [
-            'orderId' => 'test'
-        ];
+        $data = ['orderId' => 'test'];
 
-        try{
+        try {
             $order->create($data);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf(HttpException::class, $e);
         }
-
-        $data = [
-            'orderId' => 'JFKWEBELIEVE10005242129'
-        ];
-        $cargoInfo = [
-            "cargo" => '手机',
-            "cargoAmount" => "",
-            "cargoCount" => "",
-            "cargoIndex" => 0,
-            "cargoTotalWeight" => "",
-            "cargoUnit" => "",
-            "cargoWeight" => "",
-            "orderId"=>"",
-            "parcelQuantity" => 1
-        ];
-
-        $order->withCargo($cargoInfo);
-
-        $consignessInfo = [
-            "address" => "这里",
-            "city" => "广州",
-            "company" => "小鱼",
-            "contact" => "小鱼",
-            "mobile" => "17821143272",
-            "province" => "广东",
-            "shipperCode" => "",
-            "tel" => "17821143272"
-        ];
-
-        $order->withConsignee($consignessInfo);
-
-        $result = $order->create($data);
-        $this->assertEquals('EX_CODE_OPENAPI_0200', $result['head']['code']);
-        $this->assertEquals('4200', $result['head']['transType']);
-
     }
 
     public function testMagicAccess()

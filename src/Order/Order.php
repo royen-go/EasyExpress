@@ -3,7 +3,7 @@
 namespace EasyExpress\Order;
 
 use EasyExpress\Core\AbstractAPI;
-use InvalidArgumentException;
+use EasyExpress\Core\Exceptions\InvalidArgumentException;
 
 /**
  * Class Order
@@ -200,6 +200,7 @@ class Order extends AbstractAPI
     /**
      * @param array $data
      * @return array
+     * @throws InvalidArgumentException
      */
     protected function validParams(array $data = [])
     {

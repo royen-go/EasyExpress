@@ -1,6 +1,8 @@
 <?php
 namespace EasyExpress\Foundation;
 
+use Doctrine\Common\Cache\Cache as CacheInterface;
+use Doctrine\Common\Cache\FilesystemCache;
 use EasyExpress\Core\AccessToken;
 use EasyExpress\Order\Filter;
 use EasyExpress\Order\Order;
@@ -56,10 +58,18 @@ class Application extends Container
     }
 
     /**
-     *
+     * Register basic providers.
      */
     private function registerBase()
     {
+        if (!empty($this['config']['cache']) && $this['config']['cache'] instanceof CacheInterface) {
+            $this['cache'] = $this['config']['cache'];
+        } else {
+            $this['cache'] = function () {
+                return new FilesystemCache(sys_get_temp_dir());
+            };
+        }
+
         $this['access_token'] = function () {
             return new AccessToken(
                 $this['config']['appID'],
@@ -71,6 +81,33 @@ class Application extends Container
     }
 
     /**
+     * Add a provider.
+     *
+     * @param string $provider
+     *
+     * @return Application
+     */
+    public function addProvider($provider)
+    {
+        array_push($this->providers, $provider);
+        return $this;
+    }
+
+    /**
+     * Set providers.
+     *
+     * @param array $providers
+     */
+    public function setProviders(array $providers)
+    {
+        $this->providers = [];
+        foreach ($providers as $provider) {
+            $this->addProvider($provider);
+        }
+    }
+
+
+    /**
      * Return all providers.
      *
      * @return array
@@ -80,10 +117,28 @@ class Application extends Container
         return $this->providers;
     }
 
+    /**
+     * Magic get access.
+     *
+     * @param string $id
+     * @return mixed  $value
+     */
     public function __get($id)
     {
         return $this->offsetGet($id);
     }
+
+    /**
+     * Magic set access.
+     *
+     * @param string $id
+     * @param mixed  $value
+     */
+    public function __set($id, $value)
+    {
+        $this->offsetSet($id, $value);
+    }
+
 
     /**
      *
