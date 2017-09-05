@@ -56,8 +56,15 @@ abstract class AbstractAPI
     }
 
     /**
+     * @return AccessToken
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
      * @return Http
-     *
      */
     public function getHttp()
     {
@@ -70,6 +77,14 @@ abstract class AbstractAPI
         }
 
         return $this->http;
+    }
+
+    /**
+     * @param $http
+     */
+    public function setHttp($http)
+    {
+        $this->http = $http;
     }
 
     protected function registerHttpMiddlewares()
@@ -181,9 +196,11 @@ abstract class AbstractAPI
         if (isset($contents['head']) && isset($contents['head']['code']) && 'EX_CODE_OPENAPI_0200' !== $contents['head']['code']) {
 
             if (empty($contents['head']['message'])) {
-                $contents['head'] = 'Unknown';
+                $contents['head']['message'] = 'Unknown';
             }
-            throw new HttpException($contents['head']['message'], intval($contents['head']['code']));
+
+            $code = substr($contents['head']['code'], -3);
+            throw new HttpException($contents['head']['message'], $code);
         }
     }
 
