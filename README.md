@@ -1,4 +1,6 @@
-SDK for ShunFeng
+# EasyExpress ![CI status](https://travis-ci.org/royen-go/EasyExpress.svg?branch=master)
+
+EasyExpress is a PHP library for use ShunFeng APIs.
 
 ## Requirement
 
@@ -11,7 +13,7 @@ SDK for ShunFeng
 ## Installation
 
 ```shell
-composer require easyexpress/shunfeng
+composer require "easyexpress/shunfeng:~1.0" -vvv
 
 ```
 
@@ -51,3 +53,4 @@ $order->queryProductAdditional();
 ## License
 
 MIT
+
