@@ -19,7 +19,7 @@ composer require "easyexpress/shunfeng:~1.0" -vvv
 
 ## Usage
 
-基本使用:
+基本使用:（以附加服务查询为例）
 
 ```php
 

@@ -70,6 +70,17 @@ class OrderTest extends TestCase
         }
     }
 
+    public function testQuery()
+    {
+        $order = $this->getOrder();
+
+        $orderID = 'test';
+        $response = $order->query($orderID);
+
+        $this->assertStringStartsWith(Order::QUERY_ORDER_URL, $response['api']);
+        $this->assertEquals($orderID, $response['params']['body']['orderId']);
+    }
+
     public function testMagicAccess()
     {
         $accessToken = \Mockery::mock('EasyExpress\Core\AccessToken');
