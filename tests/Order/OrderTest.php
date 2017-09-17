@@ -109,7 +109,7 @@ class OrderTest extends TestCase
 
         $orderId = 'test_oder_id';
         $remark = 'remark';
-        $order->withRemark($remark)->addOrderId($orderId);
+        $order->withRemark($remark)->withOrderId($orderId);
 
         $this->assertEquals($orderId, $order->data['orderId']);
         $this->assertEquals($remark, $order->data['remark']);
