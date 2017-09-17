@@ -9,6 +9,13 @@ use EasyExpress\Core\Exceptions\InvalidArgumentException;
  * Class Order
  * @package EasyExpress\Order
  *
+ * @method Order withOrderId()
+ * @method Order withRemark()
+ * @method Order withCargo()
+ * @method Order withConsignee()
+ * @method Order withDeliver()
+ * @method Order withPayMethod()
+ *
  */
 class Order extends AbstractAPI
 {
@@ -59,7 +66,7 @@ class Order extends AbstractAPI
     public $data = [
         'addedServices' => [],
         'cargoInfo' => [
-            "cargo" => "",
+            "cargo" => "", //must
             "cargoAmount" => "",
             "cargoCount" => "",
             "cargoTotalWeight" => "",
@@ -68,14 +75,14 @@ class Order extends AbstractAPI
             "parcelQuantity" => ""
         ],
         'consigneeInfo' => [
-            "address" => "",
-            "city" => "",
-            "company" => "",
-            "contact" => "",
+            "address" => "",// must
+            "city" => "",//must
+            "company" => "",//must
+            "contact" => "",//must
             "mobile" => "",
-            "province" => "",
+            "province" => "",//must
             "shipperCode" => "",
-            "tel" => ""
+            "tel" => ""//must
         ],
         'deliverInfo' => [
             "address" => "",
@@ -97,14 +104,14 @@ class Order extends AbstractAPI
         "orderId" => '',
         "payArea" => "",
         "payMethod" => 1,
-        "remark" => 'dagds',
+        "remark" => '',
         "sendStartTime" => ''
     ];
 
     /**
      * @var array
      */
-    protected $required = ['cargoInfo', 'consigneeInfo', 'expressType', 'isDoCall', 'isGenBillNo', 'orderId', 'payMethod'];
+    protected $required = ['orderId', 'expressType', 'payMethod', 'custId', 'cargoInfo', 'consigneeInfo'];
 
     /**
      * @param array $data
@@ -247,6 +254,5 @@ class Order extends AbstractAPI
 
         return $this;
     }
-
 
 }

@@ -3,7 +3,6 @@
 namespace EasyExpress\Tests\Order;
 
 
-use EasyExpress\Core\AccessToken;
 use EasyExpress\Core\Exceptions\HttpException;
 use EasyExpress\Core\Exceptions\InvalidArgumentException;
 use EasyExpress\Order\Order;
@@ -81,6 +80,9 @@ class OrderTest extends TestCase
         $this->assertEquals($orderID, $response['params']['body']['orderId']);
     }
 
+    /**
+     *
+     */
     public function testMagicAccess()
     {
         $accessToken = \Mockery::mock('EasyExpress\Core\AccessToken');
@@ -103,6 +105,14 @@ class OrderTest extends TestCase
         $order->withCargo($cargoInfo);
 
         $this->assertEquals($cargoInfo['cargo'], $order->data['cargoInfo']['cargo']);
+        $this->assertEquals($cargoInfo, $order->data['cargoInfo']);
+
+        $orderId = 'test_oder_id';
+        $remark = 'remark';
+        $order->withRemark($remark)->addOrderId($orderId);
+
+        $this->assertEquals($orderId, $order->data['orderId']);
+        $this->assertEquals($remark, $order->data['remark']);
     }
 
 }
