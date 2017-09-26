@@ -109,7 +109,6 @@ class AccessToken
 
         return $this;
     }
-
     /**
      * @param bool $forceRefresh
      * @return false|string

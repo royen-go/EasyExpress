@@ -33,11 +33,6 @@ abstract class AbstractAPI
     protected $http;
 
     /**
-     * @var array
-     */
-    protected $middlewares = [];
-
-    /**
      * Constructor.
      *
      * @param AccessToken $accessToken

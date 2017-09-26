@@ -1,7 +1,6 @@
 <?php
 namespace EasyExpress\Foundation;
 
-
 use EasyExpress\Support\Collection;
 
 /**

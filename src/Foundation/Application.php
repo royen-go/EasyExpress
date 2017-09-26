@@ -5,6 +5,7 @@ use Doctrine\Common\Cache\Cache as CacheInterface;
 use Doctrine\Common\Cache\FilesystemCache;
 use EasyExpress\Core\AccessToken;
 use EasyExpress\Order\Filter;
+use EasyExpress\Order\Notify;
 use EasyExpress\Order\Order;
 use EasyExpress\Router\Router;
 
@@ -23,6 +24,7 @@ use Pimple\Container;
  * @property Order $order
  * @property Router $router
  * @property Filter $filter
+ * @property Notify $notify
  *
  */
 class Application extends Container
