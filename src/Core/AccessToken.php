@@ -15,7 +15,7 @@ class AccessToken
     /**
      *
      */
-    const API_TOKEN_GET = 'https://open-prod.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
+    const API_TOKEN_GET = '/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
 
     private $appId;
     private $appKey;
@@ -112,6 +112,7 @@ class AccessToken
     /**
      * @param bool $forceRefresh
      * @return false|string
+     * @throws Exceptions\HttpException
      */
     public function getToken($forceRefresh = false)
     {
@@ -132,6 +133,7 @@ class AccessToken
 
     /**
      * @return mixed
+     * @throws Exceptions\HttpException
      */
     public function getTokenFromServer()
     {
@@ -148,7 +150,6 @@ class AccessToken
         $url = sprintf(self::API_TOKEN_GET, $this->appId, $this->appKey);
 
         $token = $http->parseJSON($http->json($url, $params));
-
 
         return $token;
     }

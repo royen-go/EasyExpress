@@ -13,6 +13,11 @@ use Psr\Http\Message\ResponseInterface;
 class Http
 {
     /**
+     * @var
+     */
+    protected $baseUri = 'https://open-sbox.sf-express.com';
+
+    /**
      * Used to identify handler defined by client code
      * Maybe useful in the future.
      */
@@ -71,7 +76,6 @@ class Http
      *
      * @return ResponseInterface
      *
-     * @throws HttpException
      */
     public function get($url, array $options = [])
     {
@@ -86,7 +90,6 @@ class Http
      *
      * @return ResponseInterface
      *
-     * @throws HttpException
      */
     public function post($url, $options = [])
     {
@@ -105,7 +108,6 @@ class Http
       *
       * @return ResponseInterface
       *
-      * @throws HttpException
       */
      public function json($url, $options = [], $encodeOption = JSON_UNESCAPED_UNICODE, $queries = [])
      {
@@ -123,7 +125,6 @@ class Http
      *
      * @return ResponseInterface
      *
-     * @throws HttpException
      */
     public function upload($url, array $files = [], array $form = [], array $queries = [])
     {
@@ -204,7 +205,6 @@ class Http
      *
      * @return ResponseInterface
      *
-     * @throws HttpException
      */
     public function request($url, $method = 'GET', $options = [])
     {
@@ -215,6 +215,10 @@ class Http
         Log::debug('Client Request:', compact('url', 'method', 'options'));
 
         $options['handler'] = $this->getHandler();
+
+        if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
+            $options['base_uri'] = $this->baseUri;
+        }
 
         $response = $this->getClient()->request($method, $url, $options);
 

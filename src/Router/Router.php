@@ -1,5 +1,4 @@
 <?php
-
 namespace EasyExpress\Router;
 
 
@@ -26,7 +25,7 @@ class Router extends AbstractAPI
     /**
      * 路由查询
      */
-    const QUERY_ROUTER_URL = "https://open-prod.sf-express.com/rest/v1.0/route/query/";
+    const QUERY_ROUTER_URL = "/rest/v1.0/route/query/";
 
 
     /**
@@ -37,12 +36,13 @@ class Router extends AbstractAPI
     /**
      *
      */
-    const QUERY_INC_ROUTER_URL = "https://open-prod.sf-express.com/rest/v1.0/route/inc/query/";
+    const QUERY_INC_ROUTER_URL = "/rest/v1.0/route/inc/query/";
 
     /**
      * @param $trackingNumber
      * @param $trackingType
      * @return \EasyExpress\Support\Collection
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function query($trackingNumber, $trackingType)
     {
@@ -68,6 +68,7 @@ class Router extends AbstractAPI
     /**
      * @param $orderId
      * @return \EasyExpress\Support\Collection
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function incQuery($orderId)
     {

@@ -2,6 +2,8 @@
 
 EasyExpress is a PHP library for use ShunFeng APIs.
 
+SDK QQ群：665052579
+
 ## Requirement
 
 1. PHP >= 5.5.9

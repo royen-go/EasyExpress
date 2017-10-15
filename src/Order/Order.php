@@ -9,12 +9,12 @@ use EasyExpress\Core\Exceptions\InvalidArgumentException;
  * Class Order
  * @package EasyExpress\Order
  *
- * @method Order withOrderId()
- * @method Order withRemark()
- * @method Order withCargo()
- * @method Order withConsignee()
- * @method Order withDeliver()
- * @method Order withPayMethod()
+ * @method Order withOrderId($value)
+ * @method Order withRemark($value)
+ * @method Order withCargo($value)
+ * @method Order withConsignee($value)
+ * @method Order withDeliver($value)
+ * @method Order withPayMethod($value)
  *
  */
 class Order extends AbstractAPI
@@ -28,7 +28,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const CREATE_ORDER_URL = "https://open-prod.sf-express.com/rest/v1.0/order/";
+    const CREATE_ORDER_URL = "/rest/v1.0/order/";
 
     /**
      * 订单查询
@@ -38,7 +38,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const QUERY_ORDER_URL = 'https://open-prod.sf-express.com/rest/v1.0/order/query/';
+    const QUERY_ORDER_URL = '/rest/v1.0/order/query/';
 
     /**
      *
@@ -48,7 +48,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const WAYBILL_IMAGE_URL = "https://open-prod.sf-express.com/rest/v1.0/waybill/image/";
+    const WAYBILL_IMAGE_URL = "/rest/v1.0/waybill/image/";
 
     /**
      *
@@ -58,7 +58,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const PRODUCT_ADDITIONAL_QUERY_URL = "https://open-prod.sf-express.com/rest/v1.0/product/additional/query/";
+    const PRODUCT_ADDITIONAL_QUERY_URL = "/rest/v1.0/product/additional/query/";
 
     /**
      * @var array
@@ -116,7 +116,8 @@ class Order extends AbstractAPI
     /**
      * @param array $data
      * @return \EasyExpress\Support\Collection
-     *
+     * @throws InvalidArgumentException
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function create(array $data = [])
     {
@@ -143,7 +144,7 @@ class Order extends AbstractAPI
     /**
      * @param $orderID
      * @return \EasyExpress\Support\Collection
-     * 
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function query($orderID)
     {
@@ -164,7 +165,7 @@ class Order extends AbstractAPI
     /**
      * @param $orderId
      * @return \EasyExpress\Support\Collection
-     *
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function waybillDownload($orderId)
     {
@@ -186,7 +187,7 @@ class Order extends AbstractAPI
 
     /**
      * @return \EasyExpress\Support\Collection
-     *
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function queryProductAdditional()
     {

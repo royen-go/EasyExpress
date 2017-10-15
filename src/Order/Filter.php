@@ -9,6 +9,8 @@ use InvalidArgumentException;
  * Class Filter
  * @package EasyExpress\Order
  *
+ * @method Filter withConsignee($value)
+ * @method Filter withDeliver($value)
  */
 class Filter extends AbstractAPI
 {
@@ -20,12 +22,12 @@ class Filter extends AbstractAPI
     /**
      *
      */
-    const FILTER_ORDER_URL = 'https://open-prod.sf-express.com/rest/v1.0/filter/';
+    const FILTER_ORDER_URL = '/rest/v1.0/filter/';
 
     /**
      * @var array
      */
-    protected $required = ['consigneeCountry', 'consigneeProvince', 'consigneeCity', 'consigneeAddress', 'filterType', 'deliverCustId'];
+    protected $required = ['consigneeCountry', 'consigneeProvince', 'consigneeCity', 'consigneeAddress', 'filterType'];
 
     /**
      * @var array
@@ -50,11 +52,10 @@ class Filter extends AbstractAPI
         "consigneeAddress" => "",
     ];
 
-
     /**
      * @param array $data
      * @return \EasyExpress\Support\Collection
-     *
+     * @throws \EasyExpress\Core\Exceptions\HttpException
      */
     public function query(array $data)
     {
