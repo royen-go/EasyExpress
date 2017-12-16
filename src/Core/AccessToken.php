@@ -20,6 +20,7 @@ class AccessToken
     private $appId;
     private $appKey;
     private $custId;
+    private $mode;
 
     /**
      * @var Http
@@ -33,8 +34,14 @@ class AccessToken
      */
     protected $cache;
 
+    /**
+     * @var
+     */
     protected $cacheKey;
 
+    /**
+     * @var string
+     */
     protected $prefix = 'express.access_token.';
 
     /**
@@ -42,12 +49,15 @@ class AccessToken
      * @param string $appID
      * @param string $appKey
      * @param string $custId
+     * @param string $mode
+     *
      */
-    public function __construct($appID, $appKey, $custId)
+    public function __construct($appID, $appKey, $custId, $mode = 'dev')
     {
         $this->appId = $appID;
         $this->appKey = $appKey;
         $this->custId = $custId;
+        $this->mode = $mode;
     }
 
     /**
@@ -72,6 +82,14 @@ class AccessToken
     public function getCustId()
     {
         return $this->custId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMode()
+    {
+        return $this->mode;
     }
 
     /**

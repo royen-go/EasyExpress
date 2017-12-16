@@ -65,6 +65,7 @@ abstract class AbstractAPI
     {
         if (is_null($this->http)) {
             $this->http = new Http();
+            $this->http->changeBaseUri($this->accessToken->getMode());
         }
 
         if (count($this->http->getMiddlewares()) === 0) {
