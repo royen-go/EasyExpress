@@ -48,6 +48,8 @@ $order->queryProductAdditional();
 
 ## Documentation
 
+[wiki](https://github.com/royen-go/EasyExpress/wiki)
+
 > 强烈建议看懂顺丰文档后再来使用本 SDK。
 > https://open.sf-express.com/doc/sf_openapi_document_V1.pdf
 
