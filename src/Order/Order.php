@@ -21,7 +21,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const CREATE_ORDER_URL = "https://open-sbox.sf-express.com/rest/v1.0/order/";
+    const CREATE_ORDER_URL = "/rest/v1.0/order/";
 
     /**
      * 类型
@@ -31,7 +31,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const QUERY_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/order/query/';
+    const QUERY_ORDER_URL = '/rest/v1.0/order/query/';
 
     /**
      *
@@ -41,7 +41,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const WAYBILL_IMAGE_URL = "https://open-sbox.sf-express.com/rest/v1.0/waybill/image/";
+    const WAYBILL_IMAGE_URL = "/rest/v1.0/waybill/image/";
 
     /**
      *
@@ -51,7 +51,7 @@ class Order extends AbstractAPI
     /**
      *
      */
-    const PRODUCT_ADDITIONAL_QUERY_URL = "https://open-sbox.sf-express.com/rest/v1.0/product/additional/query/";
+    const PRODUCT_ADDITIONAL_QUERY_URL = "/rest/v1.0/product/additional/query/";
 
     /**
      * @var array
@@ -129,7 +129,7 @@ class Order extends AbstractAPI
             "head" => $dataHead,
             "body" => $this->validParams($data)
         );
-        $body = $this->parseJSON('json', [self::CREATE_ORDER_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::CREATE_ORDER_URL, $data]);
         return $body;
     }
 
@@ -150,7 +150,7 @@ class Order extends AbstractAPI
             "body" => ['orderId' => $orderID]
         );
 
-        $body = $this->parseJSON('json', [self::QUERY_ORDER_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::QUERY_ORDER_URL, $data]);
         return $body;
     }
 
@@ -173,7 +173,7 @@ class Order extends AbstractAPI
             ]
         );
 
-        $body = $this->parseJSON('json', [self::WAYBILL_IMAGE_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::WAYBILL_IMAGE_URL, $data]);
         return $body;
     }
 
@@ -193,7 +193,7 @@ class Order extends AbstractAPI
             "body" => new \stdClass()
         );
 
-        $body = $this->parseJSON('json', [self::PRODUCT_ADDITIONAL_QUERY_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::PRODUCT_ADDITIONAL_QUERY_URL, $data]);
         return $body;
     }
 

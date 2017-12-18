@@ -26,7 +26,7 @@ class Router extends AbstractAPI
     /**
      *
      */
-    const QUERY_ROUTER_URL = "https://open-sbox.sf-express.com/rest/v1.0/route/query/";
+    const QUERY_ROUTER_URL = "/rest/v1.0/route/query/";
 
 
     /**
@@ -37,7 +37,7 @@ class Router extends AbstractAPI
     /**
      *
      */
-    const QUERY_INC_ROUTER_URL = "https://open-sbox.sf-express.com/rest/v1.0/route/inc/query/";
+    const QUERY_INC_ROUTER_URL = "/rest/v1.0/route/inc/query/";
 
     /**
      * @param $trackingNumber
@@ -60,7 +60,7 @@ class Router extends AbstractAPI
             ]
         );
 
-        $body = $this->parseJSON('json', [self::QUERY_ROUTER_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::QUERY_ROUTER_URL, $data]);
 
         return $body;
     }
@@ -83,7 +83,7 @@ class Router extends AbstractAPI
             ]
         );
 
-        $body = $this->parseJSON('json', [self::QUERY_INC_ROUTER_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::QUERY_INC_ROUTER_URL, $data]);
 
         return $body;
     }

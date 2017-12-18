@@ -20,7 +20,7 @@ class Filter extends AbstractAPI
     /**
      *
      */
-    const FILTER_ORDER_URL = 'https://open-sbox.sf-express.com/rest/v1.0/filter/';
+    const FILTER_ORDER_URL = '/rest/v1.0/filter/';
 
     /**
      * @var array
@@ -68,7 +68,7 @@ class Filter extends AbstractAPI
             "body" => $this->validParams($data)
         );
 
-        $body = $this->parseJSON('json', [self::FILTER_ORDER_URL, $data]);
+        $body = $this->parseJSON('json', [$this->accessToken->getHostUrl() . self::FILTER_ORDER_URL, $data]);
         return $body;
     }
     /**

@@ -11,11 +11,12 @@ class AccessToken
     /**
      *
      */
-    const API_TOKEN_GET = 'https://open-sbox.sf-express.com/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
+    const API_TOKEN_GET = '%s/public/v1.0/security/access_token/sf_appid/%s/sf_appkey/%s';
 
     private $appId;
     private $appKey;
     private $custId;
+    private $hostUrl;
 
     /**
      * @var Http
@@ -39,11 +40,12 @@ class AccessToken
      * @param $appKey
      * @param $custId
      */
-    public function __construct($appID, $appKey, $custId)
+    public function __construct($appID, $appKey, $custId, $hostUrl)
     {
         $this->appId = $appID;
         $this->appKey = $appKey;
         $this->custId = $custId;
+        $this->hostUrl = $hostUrl;
     }
 
     /**
@@ -141,7 +143,7 @@ class AccessToken
 
         $http = $this->getHttp();
 
-        $url = sprintf(self::API_TOKEN_GET, $this->appId, $this->appKey);
+        $url = sprintf(self::API_TOKEN_GET, $this->hostUrl, $this->appId, $this->appKey);
 
         $token = $http->parseJSON($http->json($url, $params));
 
