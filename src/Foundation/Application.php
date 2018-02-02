@@ -76,7 +76,8 @@ class Application extends Container
             return new AccessToken(
                 $this['config']['appID'],
                 $this['config']['appKey'],
-                $this['config']['custID']
+                $this['config']['custID'],
+                $this['config']['mode']
             );
         };
 
