@@ -16,18 +16,6 @@ class HttpTest extends TestCase
     }
 
     /**
-     *
-     */
-    public function testChangeBaseUri()
-    {
-        $http = new Http();
-        $http->changeBaseUri('dev');
-        $this->assertTrue($http->getBaseUri() === 'https://open-sbox.sf-express.com');
-        $http->changeBaseUri('prod');
-        $this->assertTrue($http->getBaseUri() === 'https://open-prod.sf-express.com');
-    }
-
-    /**
      * Get guzzle mock client.
      *
      * @param null $expected

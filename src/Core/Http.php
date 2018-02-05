@@ -2,7 +2,6 @@
 namespace EasyExpress\Core;
 
 use EasyExpress\Core\Exceptions\HttpException;
-use EasyExpress\Core\Exceptions\InvalidConfigException;
 use EasyExpress\Support\Log;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\HandlerStack;
@@ -16,7 +15,7 @@ class Http
     /**
      * @var
      */
-    private $baseUri = 'https://open-sbox.sf-express.com';
+    protected $baseUri = 'https://open-sbox.sf-express.com';
 
     /**
      * Used to identify handler defined by client code
@@ -48,21 +47,6 @@ class Http
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
         ],
     ];
-
-    /**
-     * @param mixed $mode
-     * @throws InvalidConfigException
-     */
-    public function changeBaseUri($mode)
-    {
-        if ($mode === 'prod') {
-            $this->baseUri = 'https://open-prod.sf-express.com';
-        } elseif ($mode === 'dev') {
-            $this->baseUri = 'https://open-sbox.sf-express.com';
-        } else {
-            throw new InvalidConfigException('Wrong mode config value.');
-        }
-    }
 
     /**
      * Set guzzle default settings.
@@ -295,13 +279,4 @@ class Http
 
         return $stack;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getBaseUri()
-    {
-        return $this->baseUri;
-    }
-
 }
