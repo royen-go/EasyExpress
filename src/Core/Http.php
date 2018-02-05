@@ -15,7 +15,7 @@ class Http
     /**
      * @var
      */
-    protected $baseUri = 'https://open-sbox.sf-express.com';
+    protected $baseUri = 'https://open-prod.sf-express.com';
 
     /**
      * Used to identify handler defined by client code
