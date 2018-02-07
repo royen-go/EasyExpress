@@ -1,5 +1,5 @@
 {
-  "name": "easyexpress/shunfeng",
+  "name": "usails/shunfeng",
   "description": "顺丰SDK",
   "keywords": [
     "shunfeng SDK",
@@ -12,6 +12,10 @@
     {
       "name": "renshuai",
       "email": "renshuaia@gmail.com"
+    },
+    {
+      "name": "xsdhy",
+      "email": "xsdhy@xsdhy.com"
     }
   ],
   "require": {

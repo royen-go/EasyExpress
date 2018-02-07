@@ -81,7 +81,12 @@ class AccessToken
      */
     public function getHttp()
     {
-        return $this->http ?: $this->http = new Http();
+        if (is_null($this->http)) {
+            $this->http = new Http();
+            $this->http->changeBaseUri($this->getMode());
+        }
+
+        return $this->http;
     }
 
     public function setHttp($http)
